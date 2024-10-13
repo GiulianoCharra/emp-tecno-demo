@@ -51,6 +51,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import Link from "next/link";
 
 type BuildingType =
   | "Oficina"
@@ -192,16 +193,18 @@ export default function BuildingManagement() {
           <Building className="h-8 w-8" />
           Gestión de Edificios
         </h2>
-        <Button
-          className="bg-green-700 hover:bg-green-800"
-          onClick={() => {
-            setCurrentBuilding({});
-            setIsEditing(false);
-            setIsDialogOpen(true);
-          }}
-        >
-          <Plus className="mr-2 h-4 w-4" /> Agregar Edificio
-        </Button>
+        <Link href={`${window.location.pathname}/registrar`}>
+          <Button
+            className="bg-green-700 hover:bg-green-800"
+            // onClick={() => {
+            //   setCurrentBuilding({});
+            //   setIsEditing(false);
+            //   setIsDialogOpen(true);
+            // }}
+          >
+            <Plus className="mr-2 h-4 w-4" /> Agregar Edificio
+          </Button>
+        </Link>
       </div>
       <Card>
         <CardHeader>

@@ -134,7 +134,7 @@ export default function AssetManagement() {
                   <div
                     className={`w-16 h-16 rounded-full ${asset.color} flex items-center justify-center mb-4`}
                   >
-                    {<asset.icon className="h-8 w-8 text-green-700" />}
+                    {<asset.icon className="h-8 w-8 " />}
                   </div>
                   <CardTitle className="text-lg font-semibold  text-green-700">
                     {asset.name}
