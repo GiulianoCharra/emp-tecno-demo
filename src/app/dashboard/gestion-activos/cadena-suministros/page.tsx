@@ -47,7 +47,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 
 type SupplyChainItem = {
   id: string;
@@ -59,8 +59,7 @@ type SupplyChainItem = {
 };
 
 export default function SupplyChainManagement() {
-  const router = useRouter();
-  const rutaActual = router.pathname; // Obtiene la ruta actual
+  const rutaActual = usePathname(); // Obtiene la ruta actual
   const [supplyChainItems, setSupplyChainItems] = useState<SupplyChainItem[]>([
     {
       id: "1",

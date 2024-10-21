@@ -51,7 +51,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 
 type WasteType =
   | "Orgánico"
@@ -90,8 +90,7 @@ export default function WasteManagement() {
     Partial<WasteStream>
   >({});
   const [isEditing, setIsEditing] = useState(false);
-  const route = useRouter();
-  const rutaActual = route.pathname;
+  const rutaActual = usePathname();
 
   useEffect(() => {
     // Simulating API call to fetch waste streams

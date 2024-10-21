@@ -51,7 +51,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 
 type Machine = {
   id: string;
@@ -70,8 +70,8 @@ export default function MachineryManagement() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [currentMachine, setCurrentMachine] = useState<Partial<Machine>>({});
   const [isEditing, setIsEditing] = useState(false);
-  const router = useRouter();
-  const rutaActual = router.pathname; // Obtiene la ruta actual
+
+  const rutaActual = usePathname(); // Obtiene la ruta actual
 
   useEffect(() => {
     // Simulating API call to fetch machines

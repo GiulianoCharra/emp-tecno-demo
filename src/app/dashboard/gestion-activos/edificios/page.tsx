@@ -51,7 +51,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 
 type BuildingType =
   | "Oficina"
@@ -78,8 +78,8 @@ export default function BuildingManagement() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [currentBuilding, setCurrentBuilding] = useState<Partial<Building>>({});
   const [isEditing, setIsEditing] = useState(false);
-  const router = useRouter();
-  const rutaActual = router.pathname; // Obtiene la ruta actual
+
+  const rutaActual = usePathname(); // Obtiene la ruta actual
 
   useEffect(() => {
     // Simulating API call to fetch buildings

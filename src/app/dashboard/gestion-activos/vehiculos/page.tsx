@@ -51,7 +51,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 
 type VehicleType = "Coche" | "Camión" | "Furgoneta" | "Motocicleta" | "Otro";
 type FuelType = "Gasolina" | "Diésel" | "Eléctrico" | "Híbrido" | "GNC" | "GLP";
@@ -76,8 +76,8 @@ export default function VehicleManagement() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [currentVehicle, setCurrentVehicle] = useState<Partial<Vehicle>>({});
   const [isEditing, setIsEditing] = useState(false);
-  const router = useRouter();
-  const rutaActual = router.pathname; // Obtiene la ruta actual
+
+  const rutaActual = usePathname(); // Obtiene la ruta actual
 
   useEffect(() => {
     // Simulating API call to fetch vehicles

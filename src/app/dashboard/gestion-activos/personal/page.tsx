@@ -44,7 +44,7 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 
 type Employee = {
   id: string;
@@ -63,8 +63,8 @@ export default function PersonnelManagement() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [currentEmployee, setCurrentEmployee] = useState<Partial<Employee>>({});
   const [isEditing, setIsEditing] = useState(false);
-  const router = useRouter();
-  const rutaActual = router.pathname; // Obtiene la ruta actual
+
+  const rutaActual = usePathname(); // Obtiene la ruta actual
 
   useEffect(() => {
     // Simulating API call to fetch employees

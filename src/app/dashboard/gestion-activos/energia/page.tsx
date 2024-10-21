@@ -51,7 +51,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 
 type EnergySourceType =
   | "Electricidad"
@@ -83,8 +83,8 @@ export default function EnergyManagement() {
     Partial<EnergySource>
   >({});
   const [isEditing, setIsEditing] = useState(false);
-  const router = useRouter();
-  const rutaActual = router.pathname; // Obtiene la ruta actual
+
+  const rutaActual = usePathname(); // Obtiene la ruta actual
 
   useEffect(() => {
     // Simulating API call to fetch energy sources
