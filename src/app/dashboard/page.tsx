@@ -6,12 +6,10 @@ import {
   AlertCircle,
   ArrowDown,
   ArrowUp,
-  Home,
   Leaf,
   ShoppingCart,
   Zap,
   Car,
-  User,
   BarChart as BarChartIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -23,7 +21,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const data = [
   { name: "Ene", total: 1.2 },

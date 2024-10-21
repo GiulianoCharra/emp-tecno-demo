@@ -1,19 +1,13 @@
 "use client";
 
-import { useState } from "react";
 import {
   Building,
   Car,
   Factory,
-  Leaf,
-  Package,
-  Plus,
   Trash2,
   Users,
-  Wind,
   Zap,
   Droplet,
-  BarChart2,
   Truck,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -86,7 +80,7 @@ const assetTypes = [
   {
     name: "Cadena de Suministro",
     icon: Truck,
-    href: "/dashboard/gestion-activos/suministro",
+    href: "/dashboard/gestion-activos/cadena-suministros",
     description: "Proveedores y logística",
     count: 40,
     impact: "Medio",
@@ -105,7 +99,7 @@ const assetTypes = [
 
 export default function AssetManagement() {
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto pt-5 pb-10">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-3xl font-bold text-green-700">
           Gestión de Activos
@@ -134,7 +128,7 @@ export default function AssetManagement() {
                   <div
                     className={`w-16 h-16 rounded-full ${asset.color} flex items-center justify-center mb-4`}
                   >
-                    {<asset.icon className="h-8 w-8 " />}
+                    {<asset.icon className="h-8 w-8 text-black" />}
                   </div>
                   <CardTitle className="text-lg font-semibold  text-green-700">
                     {asset.name}

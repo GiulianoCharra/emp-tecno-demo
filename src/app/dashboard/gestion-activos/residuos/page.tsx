@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from "react";
 import {
-  Trash2,
   Plus,
   Search,
   MoreHorizontal,
   FileEdit,
   Trash,
+  Recycle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -41,7 +41,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import {
@@ -51,6 +50,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import Link from "next/link";
 
 type WasteType =
   | "Orgánico"
@@ -223,23 +223,24 @@ export default function WasteManagement() {
   };
 
   return (
-    <div className="container mx-auto py-10">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-3xl font-bold text-green-700 flex items-center gap-2">
-          <Trash2 className="h-8 w-8" />
-          Gestión de Residuos
-        </h2>
-        <Button
-          className="bg-green-700 hover:bg-green-800"
-          onClick={() => {
-            setCurrentWasteStream({});
-            setIsEditing(false);
-            setIsDialogOpen(true);
-          }}
-        >
-          <Plus className="mr-2 h-4 w-4" /> Agregar Flujo de Residuos
-        </Button>
+    <div className="container mx-auto space-y-6">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center space-x-2">
+          <Recycle className="h-6 w-6 text-green-600" />
+          <h2 className="text-2xl font-semibold text-gray-800">
+            Gestión de Residuos
+          </h2>
+        </div>
+        <Link href={`${window.location.pathname}/registrar`}>
+          <Button
+            // onClick={() => setIsDialogOpen(true)}
+            className="bg-green-600 hover:bg-green-700"
+          >
+            <Plus className="mr-2 h-4 w-4" /> Agregar Flujo de Residuos
+          </Button>
+        </Link>
       </div>
+
       <Card>
         <CardHeader>
           <CardTitle>Resumen de Residuos</CardTitle>
@@ -250,33 +251,33 @@ export default function WasteManagement() {
         </CardHeader>
         <CardContent>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <div className="flex flex-col p-3 border rounded-lg">
+            <div className="flex flex-col p-3 border rounded-lg bg-blue-50">
               <span className="text-sm text-gray-500">
                 Total de Flujos de Residuos
               </span>
-              <span className="text-2xl font-bold">
+              <span className="text-2xl font-bold text-blue-600">
                 {filteredWasteStreams.length}
               </span>
             </div>
-            <div className="flex flex-col p-3 border rounded-lg">
+            <div className="flex flex-col p-3 border rounded-lg bg-green-50">
               <span className="text-sm text-gray-500">
                 Cantidad Total de Residuos
               </span>
-              <span className="text-2xl font-bold">
+              <span className="text-2xl font-bold text-green-600">
                 {getTotalWaste().toLocaleString()} kg
               </span>
             </div>
-            <div className="flex flex-col p-3 border rounded-lg">
+            <div className="flex flex-col p-3 border rounded-lg bg-yellow-50">
               <span className="text-sm text-gray-500">Residuos Reciclados</span>
-              <span className="text-2xl font-bold">
+              <span className="text-2xl font-bold text-yellow-600">
                 {getRecycledWaste().toLocaleString()} kg
               </span>
             </div>
-            <div className="flex flex-col p-3 border rounded-lg">
+            <div className="flex flex-col p-3 border rounded-lg bg-red-50">
               <span className="text-sm text-gray-500">
                 Huella de Carbono Total
               </span>
-              <span className="text-2xl font-bold">
+              <span className="text-2xl font-bold text-red-600">
                 {wasteStreams
                   .reduce((sum, stream) => sum + stream.carbonFootprint, 0)
                   .toFixed(2)}{" "}
@@ -286,7 +287,8 @@ export default function WasteManagement() {
           </div>
         </CardContent>
       </Card>
-      <div className="flex justify-between items-center mt-6">
+
+      <div className="flex justify-between items-center">
         <div className="relative w-64">
           <Search className="absolute left-2 top-2.5 h-4 w-4 text-gray-500" />
           <Input
@@ -297,60 +299,122 @@ export default function WasteManagement() {
           />
         </div>
       </div>
-      <Table className="mt-4">
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[200px]">Nombre</TableHead>
-            <TableHead>Tipo</TableHead>
-            <TableHead>Cantidad</TableHead>
-            <TableHead>Método de Disposición</TableHead>
-            <TableHead>Tasa de Reciclaje</TableHead>
-            <TableHead>Huella de Carbono (tCO2e)</TableHead>
-            <TableHead>Última Recolección</TableHead>
-            <TableHead className="w-[100px]"></TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {filteredWasteStreams.map((stream) => (
-            <TableRow key={stream.id}>
-              <TableCell className="font-medium">{stream.name}</TableCell>
-              <TableCell>{stream.type}</TableCell>
-              <TableCell>{`${stream.quantity} ${stream.unit}`}</TableCell>
-              <TableCell>{stream.disposalMethod}</TableCell>
-              <TableCell>{`${stream.recyclingRate}%`}</TableCell>
-              <TableCell>{stream.carbonFootprint.toFixed(2)}</TableCell>
-              <TableCell>{stream.lastCollection}</TableCell>
-              <TableCell>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      className="h-8 w-8 p-0"
-                    >
-                      <MoreHorizontal className="h-4 w-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuLabel>Acciones</DropdownMenuLabel>
-                    <DropdownMenuItem onClick={() => handleEdit(stream)}>
-                      <FileEdit className="mr-2 h-4 w-4" />
-                      Editar
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem
-                      onClick={() => handleDelete(stream.id)}
-                      className="text-red-600"
-                    >
-                      <Trash className="mr-2 h-4 w-4" />
-                      Eliminar
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </TableCell>
+
+      <div className="rounded-md border">
+        <Table>
+          <TableHeader className="bg-gray-100">
+            <TableRow>
+              <TableHead className="w-[200px]">Nombre</TableHead>
+              <TableHead>Tipo</TableHead>
+              <TableHead>Cantidad</TableHead>
+              <TableHead>Método de Disposición</TableHead>
+              <TableHead>Tasa de Reciclaje</TableHead>
+              <TableHead>Huella de Carbono (tCO2e)</TableHead>
+              <TableHead>Última Recolección</TableHead>
+              <TableHead className="w-[100px]">Acciones</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {filteredWasteStreams.map((stream, index) => (
+              <TableRow
+                key={stream.id}
+                className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
+              >
+                <TableCell className="font-medium">{stream.name}</TableCell>
+                <TableCell>
+                  <span
+                    className={`px-2 py-1 rounded-full text-xs font-medium
+                    ${
+                      stream.type === "Orgánico"
+                        ? "bg-green-100 text-green-800"
+                        : stream.type === "Plástico"
+                        ? "bg-blue-100 text-blue-800"
+                        : stream.type === "Papel"
+                        ? "bg-yellow-100 text-yellow-800"
+                        : stream.type === "Vidrio"
+                        ? "bg-purple-100 text-purple-800"
+                        : stream.type === "Metal"
+                        ? "bg-gray-100 text-gray-800"
+                        : stream.type === "Electrónico"
+                        ? "bg-red-100 text-red-800"
+                        : stream.type === "Peligroso"
+                        ? "bg-orange-100 text-orange-800"
+                        : "bg-indigo-100 text-indigo-800"
+                    }`}
+                  >
+                    {stream.type}
+                  </span>
+                </TableCell>
+                <TableCell>{`${stream.quantity} ${stream.unit}`}</TableCell>
+                <TableCell>
+                  <span
+                    className={`px-2 py-1 rounded-full text-xs font-medium
+                    ${
+                      stream.disposalMethod === "Reciclaje"
+                        ? "bg-green-100 text-green-800"
+                        : stream.disposalMethod === "Compostaje"
+                        ? "bg-yellow-100 text-yellow-800"
+                        : stream.disposalMethod === "Incineración"
+                        ? "bg-red-100 text-red-800"
+                        : stream.disposalMethod === "Vertedero"
+                        ? "bg-gray-100 text-gray-800"
+                        : "bg-purple-100 text-purple-800"
+                    }`}
+                  >
+                    {stream.disposalMethod}
+                  </span>
+                </TableCell>
+                <TableCell>
+                  <span
+                    className={`px-2 py-1 rounded-full text-xs font-medium
+                    ${
+                      stream.recyclingRate > 75
+                        ? "bg-green-100 text-green-800"
+                        : stream.recyclingRate > 50
+                        ? "bg-yellow-100 text-yellow-800"
+                        : stream.recyclingRate > 25
+                        ? "bg-orange-100 text-orange-800"
+                        : "bg-red-100 text-red-800"
+                    }`}
+                  >
+                    {`${stream.recyclingRate}%`}
+                  </span>
+                </TableCell>
+                <TableCell>{stream.carbonFootprint.toFixed(2)}</TableCell>
+                <TableCell>{stream.lastCollection}</TableCell>
+                <TableCell>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        className="h-8 w-8 p-0"
+                      >
+                        <MoreHorizontal className="h-4 w-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuLabel>Acciones</DropdownMenuLabel>
+                      <DropdownMenuItem onClick={() => handleEdit(stream)}>
+                        <FileEdit className="mr-2 h-4 w-4" />
+                        Editar
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem
+                        onClick={() => handleDelete(stream.id)}
+                        className="text-red-600"
+                      >
+                        <Trash className="mr-2 h-4 w-4" />
+                        Eliminar
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+
       <Dialog
         open={isDialogOpen}
         onOpenChange={setIsDialogOpen}
@@ -536,7 +600,7 @@ export default function WasteManagement() {
             <DialogFooter>
               <Button
                 type="submit"
-                className="bg-green-700 hover:bg-green-800"
+                className="bg-green-600 hover:bg-green-700"
               >
                 {isEditing ? "Actualizar" : "Guardar"} Flujo de Residuos
               </Button>
