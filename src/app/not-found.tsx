@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -9,6 +9,7 @@ import { Leaf } from "lucide-react";
 
 export default function NotFound() {
   const [progress, setProgress] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
     const timer = setTimeout(() => {
