@@ -566,7 +566,10 @@ export default function EnergySourceRegistration() {
                                   checked={field.value?.includes(item)}
                                   onCheckedChange={(checked) => {
                                     return checked
-                                      ? field.onChange([...field.value, item])
+                                      ? field.onChange([
+                                          ...(field.value || []),
+                                          item,
+                                        ])
                                       : field.onChange(
                                           field.value?.filter(
                                             (value) => value !== item
@@ -630,7 +633,10 @@ export default function EnergySourceRegistration() {
                                   checked={field.value?.includes(item)}
                                   onCheckedChange={(checked) => {
                                     return checked
-                                      ? field.onChange([...field.value, item])
+                                      ? field.onChange([
+                                          ...(field.value || []),
+                                          item,
+                                        ])
                                       : field.onChange(
                                           field.value?.filter(
                                             (value) => value !== item
@@ -693,7 +699,10 @@ export default function EnergySourceRegistration() {
                                   checked={field.value?.includes(item)}
                                   onCheckedChange={(checked) => {
                                     return checked
-                                      ? field.onChange([...field.value, item])
+                                      ? field.onChange([
+                                          ...(field.value || []),
+                                          item,
+                                        ])
                                       : field.onChange(
                                           field.value?.filter(
                                             (value) => value !== item
