@@ -47,6 +47,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 type SupplyChainItem = {
   id: string;
@@ -58,6 +59,8 @@ type SupplyChainItem = {
 };
 
 export default function SupplyChainManagement() {
+  const router = useRouter();
+  const rutaActual = router.pathname; // Obtiene la ruta actual
   const [supplyChainItems, setSupplyChainItems] = useState<SupplyChainItem[]>([
     {
       id: "1",
@@ -190,7 +193,7 @@ export default function SupplyChainManagement() {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        <Link href={`${window.location.pathname}/registrar`}>
+        <Link href={`${rutaActual}/registrar`}>
           <Button
             // onClick={() => setIsDialogOpen(true)}
             className="bg-green-700 hover:bg-green-800"

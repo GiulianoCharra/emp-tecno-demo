@@ -51,6 +51,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 type Machine = {
   id: string;
@@ -69,6 +70,8 @@ export default function MachineryManagement() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [currentMachine, setCurrentMachine] = useState<Partial<Machine>>({});
   const [isEditing, setIsEditing] = useState(false);
+  const router = useRouter();
+  const rutaActual = router.pathname; // Obtiene la ruta actual
 
   useEffect(() => {
     // Simulating API call to fetch machines
@@ -184,7 +187,7 @@ export default function MachineryManagement() {
           <Factory className="h-8 w-8" />
           Gestión de Maquinaria
         </h2>
-        <Link href={`${window.location.pathname}/registrar`}>
+        <Link href={`${rutaActual}/registrar`}>
           <Button
             className="bg-green-700 hover:bg-green-800"
             // onClick={() => {

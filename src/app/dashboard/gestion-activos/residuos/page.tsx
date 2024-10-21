@@ -51,6 +51,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 type WasteType =
   | "Orgánico"
@@ -89,6 +90,8 @@ export default function WasteManagement() {
     Partial<WasteStream>
   >({});
   const [isEditing, setIsEditing] = useState(false);
+  const route = useRouter();
+  const rutaActual = route.pathname;
 
   useEffect(() => {
     // Simulating API call to fetch waste streams
@@ -231,7 +234,7 @@ export default function WasteManagement() {
             Gestión de Residuos
           </h2>
         </div>
-        <Link href={`${window.location.pathname}/registrar`}>
+        <Link href={`${rutaActual}/registrar`}>
           <Button
             // onClick={() => setIsDialogOpen(true)}
             className="bg-green-600 hover:bg-green-700"
