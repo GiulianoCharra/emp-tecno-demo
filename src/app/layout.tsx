@@ -4,7 +4,13 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Users, BarChart2, Factory, Trees } from "lucide-react";
+import {
+  Users,
+  BarChart2,
+  Factory,
+  Trees,
+  Calculator,
+} from "lucide-react";
 import ThemeToggle from "@/components/ui/theme-toggle";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -28,7 +34,7 @@ export default function RootLayout({
         )}
       >
         <header
-          className="flex items-center h-16 px-4 border-b shrink-0 md:px-6 bg-white
+          className="fixed z-50 w-full flex items-center h-16 px-4 border-b shrink-0 md:px-6 bg-white
         dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200
         "
         >
@@ -47,6 +53,16 @@ export default function RootLayout({
               <Link href={`/dashboard`}>
                 <BarChart2 className="mr-2 h-4 w-4" />
                 Dashboard
+              </Link>
+            </Button>
+            <Button
+              variant="ghost"
+              className="text-sm font-medium"
+              asChild
+            >
+              <Link href={`/dashboard/calculadora`}>
+                <Calculator className="mr-2 h-4 w-4" />
+                Calculadora
               </Link>
             </Button>
             <Button
@@ -82,7 +98,7 @@ export default function RootLayout({
             <span className="sr-only">Perfil de usuario</span>
           </Button>
         </header>
-        <main className="flex-1 p-4 md:p-6">{children}</main>
+        <main className="flex-1 p-4 pt-14">{children}</main>
       </body>
     </html>
   );
