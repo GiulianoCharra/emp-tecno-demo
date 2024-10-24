@@ -7,10 +7,13 @@ import {
   ArrowDown,
   ArrowUp,
   Leaf,
-  ShoppingCart,
   Zap,
   Car,
   BarChart as BarChartIcon,
+  Building,
+  Users,
+  Truck,
+  Factory,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,6 +24,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import Link from "next/link";
 
 const data = [
   { name: "Ene", total: 1.2 },
@@ -31,11 +35,64 @@ const data = [
   { name: "Jun", total: 1.1 },
 ];
 
+const assetCategories = [
+  {
+    name: "Edificios",
+    icon: <Building className="h-4 w-4 text-blue-500" />,
+    emissions: 0.5,
+    color: "bg-blue-500",
+  },
+  {
+    name: "Vehículos",
+    icon: <Car className="h-4 w-4 text-green-500" />,
+    emissions: 0.3,
+    color: "bg-green-500",
+  },
+  {
+    name: "Maquinaria",
+    icon: <Factory className="h-4 w-4 text-yellow-500" />,
+    emissions: 0.2,
+    color: "bg-yellow-500",
+  },
+  {
+    name: "Personal",
+    icon: <Users className="h-4 w-4 text-purple-500" />,
+    emissions: 0.1,
+    color: "bg-purple-500",
+  },
+  {
+    name: "Cadena de Suministro",
+    icon: <Truck className="h-4 w-4 text-red-500" />,
+    emissions: 0.1,
+    color: "bg-red-500",
+  },
+  {
+    name: "Energía",
+    icon: <Zap className="h-4 w-4 text-yellow-200" />,
+    emissions: 0.3,
+    color: "bg-yellow-200",
+  },
+];
+
 export default function Dashboard() {
   const [goalProgress, setGoalProgress] = useState(65);
 
+  const totalEmissions = assetCategories.reduce(
+    (sum, category) => sum + category.emissions,
+    0
+  );
+
   return (
-    <main className="flex-1 p-4 md:p-6 space-y-6">
+    <div className="flex flex-col min-h-screen space-y-6 pt-10">
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-bold text-green-700">Dashboard</h1>
+        <Link href="/dashboard/gestion-activos">
+          <Button className="bg-green-700 hover:bg-green-800">
+            <Building className="mr-2 h-4 w-4" /> Gestionar Activos
+          </Button>
+        </Link>
+      </div>
+
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -46,7 +103,7 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-green-700">
-              1.2 toneladas CO2e
+              {totalEmissions.toFixed(1)} toneladas CO2e
             </div>
             <p className="text-xs text-muted-foreground">
               <ArrowDown className="h-4 w-4 text-green-500 inline mr-1" />
@@ -54,45 +111,32 @@ export default function Dashboard() {
             </p>
           </CardContent>
         </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Energía</CardTitle>
-            <Zap className="h-4 w-4 text-yellow-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">0.5 toneladas CO2e</div>
-            <p className="text-xs text-muted-foreground">
-              <ArrowUp className="h-4 w-4 text-red-500 inline mr-1" />
-              0.1 toneladas desde el mes pasado
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Transporte</CardTitle>
-            <Car className="h-4 w-4 text-blue-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">0.4 toneladas CO2e</div>
-            <p className="text-xs text-muted-foreground">
-              <ArrowDown className="h-4 w-4 text-green-500 inline mr-1" />
-              0.2 toneladas desde el mes pasado
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Consumo</CardTitle>
-            <ShoppingCart className="h-4 w-4 text-purple-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">0.3 toneladas CO2e</div>
-            <p className="text-xs text-muted-foreground">
-              Sin cambios desde el mes pasado
-            </p>
-          </CardContent>
-        </Card>
+        {assetCategories.slice(0, 3).map((category, index) => (
+          <Card key={index}>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">
+                {category.name}
+              </CardTitle>
+              {category.icon}
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                {category.emissions.toFixed(1)} toneladas CO2e
+              </div>
+              <p className="text-xs text-muted-foreground">
+                {category.emissions > 0.2 ? (
+                  <ArrowUp className="h-4 w-4 text-red-500 inline mr-1" />
+                ) : (
+                  <ArrowDown className="h-4 w-4 text-green-500 inline mr-1" />
+                )}
+                {(category.emissions * 0.1).toFixed(1)} toneladas desde el mes
+                pasado
+              </p>
+            </CardContent>
+          </Card>
+        ))}
       </div>
+
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
         <Card className="col-span-4">
           <CardHeader>
@@ -134,75 +178,46 @@ export default function Dashboard() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-green-700">
               <Leaf className="h-5 w-5" />
-              Desglose por Categoría
+              Desglose por Categoría de Activos
             </CardTitle>
             <CardDescription>
-              Tu huella de carbono por área de actividad
+              Tu huella de carbono por tipo de activo
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-8">
-              <div className="space-y-2">
-                <div className="flex items-center">
-                  <div className="w-full flex items-center justify-between">
-                    <div className="space-y-1">
-                      <p className="text-sm font-medium leading-none">
-                        Energía
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        0.5 toneladas CO2e
-                      </p>
+            <div className="space-y-4">
+              {assetCategories.map((category, index) => (
+                <div
+                  key={index}
+                  className="space-y-2"
+                >
+                  <div className="flex items-center">
+                    <div className="w-full flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        {category.icon}
+                        <p className="text-sm font-medium leading-none">
+                          {category.name}
+                        </p>
+                      </div>
+                      <div className="font-medium">
+                        {((category.emissions / totalEmissions) * 100).toFixed(
+                          0
+                        )}
+                        %
+                      </div>
                     </div>
-                    <div className="font-medium">42%</div>
                   </div>
+                  <Progress
+                    value={(category.emissions / totalEmissions) * 100}
+                    className={`h-2 ${category.color}`}
+                  />
                 </div>
-                <Progress
-                  value={42}
-                  className="h-2 bg-yellow-500"
-                />
-              </div>
-              <div className="space-y-2">
-                <div className="flex items-center">
-                  <div className="w-full flex items-center justify-between">
-                    <div className="space-y-1">
-                      <p className="text-sm font-medium leading-none">
-                        Transporte
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        0.4 toneladas CO2e
-                      </p>
-                    </div>
-                    <div className="font-medium">33%</div>
-                  </div>
-                </div>
-                <Progress
-                  value={33}
-                  className="h-2 bg-blue-500"
-                />
-              </div>
-              <div className="space-y-2">
-                <div className="flex items-center">
-                  <div className="w-full flex items-center justify-between">
-                    <div className="space-y-1">
-                      <p className="text-sm font-medium leading-none">
-                        Consumo
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        0.3 toneladas CO2e
-                      </p>
-                    </div>
-                    <div className="font-medium">25%</div>
-                  </div>
-                </div>
-                <Progress
-                  value={25}
-                  className="h-2 bg-purple-500"
-                />
-              </div>
+              ))}
             </div>
           </CardContent>
         </Card>
       </div>
+
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
         <Card className="col-span-4">
           <CardHeader>
@@ -217,37 +232,38 @@ export default function Dashboard() {
           <CardContent>
             <div className="space-y-4">
               <div className="flex items-start space-x-4">
-                <Car className="mt-0.5 h-5 w-5 text-blue-500" />
+                <Building className="mt-0.5 h-5 w-5 text-blue-500" />
                 <div className="space-y-1">
                   <p className="text-sm font-medium leading-none">
-                    Usa transporte público o bicicleta
+                    Mejora la eficiencia energética de los edificios
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    Reduce tus emisiones de transporte hasta en un 50%
+                    Implementa sistemas de gestión de energía y aislamiento
+                    térmico
                   </p>
                 </div>
               </div>
               <div className="flex items-start space-x-4">
-                <Zap className="mt-0.5 h-5 w-5 text-yellow-500" />
+                <Car className="mt-0.5 h-5 w-5 text-green-500" />
                 <div className="space-y-1">
                   <p className="text-sm font-medium leading-none">
-                    Cambia a bombillas LED
+                    Optimiza la flota de vehículos
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    Ahorra hasta un 80% en el consumo de energía para
-                    iluminación
+                    Considera vehículos eléctricos o híbridos para reducir
+                    emisiones
                   </p>
                 </div>
               </div>
               <div className="flex items-start space-x-4">
-                <Leaf className="mt-0.5 h-5 w-5 text-green-500" />
+                <Factory className="mt-0.5 h-5 w-5 text-yellow-500" />
                 <div className="space-y-1">
                   <p className="text-sm font-medium leading-none">
-                    Reduce el consumo de carne
+                    Actualiza la maquinaria a modelos más eficientes
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    Una dieta basada en plantas puede reducir tu huella hasta en
-                    un 30%
+                    Invierte en tecnología que reduzca el consumo de energía y
+                    recursos
                   </p>
                 </div>
               </div>
@@ -271,7 +287,8 @@ export default function Dashboard() {
                   Meta Anual: 20% de reducción
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  0.24 toneladas CO2e / 1.2 toneladas CO2e
+                  {(totalEmissions * 0.2).toFixed(2)} toneladas CO2e /{" "}
+                  {totalEmissions.toFixed(2)} toneladas CO2e
                 </p>
               </div>
               <div className="text-2xl font-bold text-green-700">
@@ -280,7 +297,7 @@ export default function Dashboard() {
             </div>
             <Progress
               value={goalProgress}
-              className="h-2 bg-green-600"
+              className="h-2"
             />
             <div className="flex justify-between text-sm text-muted-foreground">
               <div>0%</div>
@@ -295,6 +312,6 @@ export default function Dashboard() {
           </CardContent>
         </Card>
       </div>
-    </main>
+    </div>
   );
 }

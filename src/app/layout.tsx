@@ -4,13 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import {
-  Users,
-  BarChart2,
-  Factory,
-  Trees,
-  Calculator,
-} from "lucide-react";
+import { Users, BarChart2, Factory, Trees, Calculator } from "lucide-react";
 import ThemeToggle from "@/components/ui/theme-toggle";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -63,16 +57,6 @@ export default function RootLayout({
               <Link href={`/dashboard/calculadora`}>
                 <Calculator className="mr-2 h-4 w-4" />
                 Calculadora
-              </Link>
-            </Button>
-            <Button
-              variant="ghost"
-              className="text-sm font-medium"
-              asChild
-            >
-              <Link href={`/dashboard/gestion-activos`}>
-                <Factory className="mr-2 h-4 w-4" />
-                Activos
               </Link>
             </Button>
             <Button
