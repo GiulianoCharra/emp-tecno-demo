@@ -36,6 +36,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import Link from "next/link";
+import Image from "next/image";
 
 const formSchema = z.object({
   // Housing
@@ -83,6 +85,27 @@ const formSchema = z.object({
   communityInvolvement: z.boolean(),
   carbonOffsetPurchases: z.boolean(),
 });
+
+const carbonCreditProjects = [
+  {
+    id: "1",
+    name: "Reforestación Amazónica",
+    description: "Proyecto de reforestación en la Amazonía brasileña",
+    image: "/images/reforestacion-amazonica.png",
+  },
+  {
+    id: "2",
+    name: "Parque Eólico Patagonia",
+    description: "Desarrollo de energía eólica en la Patagonia argentina",
+    image: "/images/parque-eolico-patagonia.png",
+  },
+  {
+    id: "3",
+    name: "Conservación de Manglares",
+    description: "Protección de ecosistemas de manglares en Bangladesh",
+    image: "/images/conservacion-de-manglares.png",
+  },
+];
 
 export default function CarbonFootprintCalculator() {
   const [currentStep, setCurrentStep] = useState(0);
@@ -1212,6 +1235,37 @@ export default function CarbonFootprintCalculator() {
                 que no puedas reducir.
               </li>
             </ul>
+            <div className="grid gap-4 md:grid-cols-3">
+              {carbonCreditProjects.map((project) => (
+                <Card key={project.id}>
+                  <CardHeader className="p-4">
+                    <div className="relative w-full h-40 mb-2">
+                      <Image
+                        src={project.image}
+                        alt={project.name}
+                        layout="fill"
+                        objectFit="cover"
+                        className="rounded-t-lg"
+                      />
+                    </div>
+                    <CardTitle className="text-lg">{project.name}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-gray-600">
+                      {project.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+            <div className="mt-6 text-center">
+              <Link href="/dashboard/marketplace">
+                <Button className="bg-green-600 hover:bg-green-700">
+                  Explorar Marketplace de Bonos de Carbono
+                </Button>
+              </Link>
+            </div>
+
             <Button
               onClick={() => {
                 setResult(null);

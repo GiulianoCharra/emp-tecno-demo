@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import {
   AlertCircle,
@@ -24,16 +24,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import Link from "next/link";
-
-const data = [
-  { name: "Ene", total: 1.2 },
-  { name: "Feb", total: 1.1 },
-  { name: "Mar", total: 1.3 },
-  { name: "Abr", total: 1.0 },
-  { name: "May", total: 0.9 },
-  { name: "Jun", total: 1.1 },
-];
+import Image from "next/image";
+import { DateRange } from "react-day-picker";
+import DatePickerWithRange from "@/components/ui/date-picker-with-range";
 
 const assetCategories = [
   {
@@ -74,13 +75,89 @@ const assetCategories = [
   },
 ];
 
+const carbonCredits = [
+  {
+    id: "1",
+    name: "Reforestación Amazónica",
+    quantity: 10,
+    progress: 75,
+    image: "/images/reforestacion-amazonica.png",
+  },
+  {
+    id: "2",
+    name: "Parque Eólico Patagonia",
+    quantity: 5,
+    progress: 60,
+    image: "/images/parque-eolico-patagonia.png",
+  },
+  {
+    id: "3",
+    name: "Conservación de Manglares",
+    quantity: 8,
+    progress: 80,
+    image: "/images/conservacion-de-manglares.png",
+  },
+];
+
+type Year = "2023" | "2024";
+
+const emissionsData: Record<Year, { name: string; total: number }[]> = {
+  2023: [
+    { name: "May", total: 1.5 },
+    { name: "Jun", total: 1.4 },
+    { name: "Jul", total: 1.3 },
+    { name: "Ago", total: 1.2 },
+    { name: "Sep", total: 1.1 },
+    { name: "Oct", total: 1.0 },
+    { name: "Nov", total: 0.9 },
+    { name: "Dic", total: 0.8 },
+  ],
+  2024: [
+    { name: "Ene", total: 1.2 },
+    { name: "Feb", total: 1.1 },
+    { name: "Mar", total: 1.3 },
+    { name: "Abr", total: 1.0 },
+    { name: "May", total: 0.9 },
+    { name: "Jun", total: 1.1 },
+  ],
+};
+
 export default function Dashboard() {
   const [goalProgress, setGoalProgress] = useState(65);
+  const [selectedYear, setSelectedYear] = useState<Year>("2024");
+  const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
+  const [chartData, setChartData] = useState(emissionsData["2024"]);
 
   const totalEmissions = assetCategories.reduce(
     (sum, category) => sum + category.emissions,
     0
   );
+
+  useEffect(() => {
+    const filteredData = emissionsData[selectedYear].filter((item) => {
+      if (!dateRange || !dateRange.from || !dateRange.to) return true;
+      const itemDate = new Date(
+        parseInt(selectedYear),
+        [
+          "Ene",
+          "Feb",
+          "Mar",
+          "Abr",
+          "May",
+          "Jun",
+          "Jul",
+          "Ago",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dic",
+        ].indexOf(item.name),
+        1
+      );
+      return itemDate >= dateRange.from && itemDate <= dateRange.to;
+    });
+    setChartData(filteredData);
+  }, [selectedYear, dateRange]);
 
   return (
     <div className="flex flex-col min-h-screen space-y-6 pt-10">
@@ -146,11 +223,31 @@ export default function Dashboard() {
             </CardTitle>
           </CardHeader>
           <CardContent className="pl-2">
+            <div className="flex justify-between items-center mb-4">
+              <Select
+                value={selectedYear}
+                onValueChange={(value) =>
+                  setSelectedYear(value as "2023" | "2024")
+                }
+              >
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="Seleccionar periodo" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="2023">Periodo 2023</SelectItem>
+                  <SelectItem value="2024">Periodo 2024</SelectItem>
+                </SelectContent>
+              </Select>
+              <DatePickerWithRange
+                date={dateRange}
+                setDate={setDateRange}
+              />
+            </div>
             <ResponsiveContainer
               width="100%"
               height={350}
             >
-              <BarChart data={data}>
+              <BarChart data={chartData}>
                 <XAxis
                   dataKey="name"
                   stroke="#888888"
@@ -174,6 +271,7 @@ export default function Dashboard() {
             </ResponsiveContainer>
           </CardContent>
         </Card>
+
         <Card className="col-span-3">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-green-700">
@@ -312,6 +410,51 @@ export default function Dashboard() {
           </CardContent>
         </Card>
       </div>
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-green-700">
+            <Leaf className="h-5 w-5" />
+            Bonos de Carbono Comprados
+          </CardTitle>
+          <CardDescription>
+            Proyectos en los que has invertido para compensar tu huella de
+            carbono
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {carbonCredits.map((credit) => (
+              <Card key={credit.id}>
+                <CardHeader className="pb-2">
+                  <div className="relative w-full h-40 mb-2">
+                    <Image
+                      src={credit.image}
+                      alt={credit.name}
+                      layout="fill"
+                      objectFit="cover"
+                      className="rounded-t-lg"
+                    />
+                  </div>
+
+                  <CardTitle className="text-lg">{credit.name}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm mb-2">
+                    Bonos comprados: {credit.quantity}
+                  </p>
+                  <p className="text-sm mb-2">Progreso del proyecto:</p>
+                  <Progress
+                    value={credit.progress}
+                    className="h-2 mb-1"
+                  />
+                  <p className="text-xs text-right">{credit.progress}%</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
