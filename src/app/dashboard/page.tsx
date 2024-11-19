@@ -14,6 +14,8 @@ import {
   Users,
   Truck,
   Factory,
+  PieChart,
+  Smartphone,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -163,11 +165,18 @@ export default function Dashboard() {
     <div className="flex flex-col min-h-screen space-y-6 pt-10">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold text-green-700">Dashboard</h1>
-        <Link href="/dashboard/gestion-activos">
-          <Button className="bg-green-700 hover:bg-green-800">
-            <Building className="mr-2 h-4 w-4" /> Gestionar Activos
-          </Button>
-        </Link>
+        <div className="flex space-x-4">
+          <Link href="/dashboard/estadisticas">
+            <Button className="bg-green-700 hover:bg-green-800">
+              <PieChart className="mr-2 h-4 w-4" /> Estadísticas
+            </Button>
+          </Link>
+          <Link href="/dashboard/gestion-activos">
+            <Button className="bg-green-700 hover:bg-green-800">
+              <Building className="mr-2 h-4 w-4" /> Gestionar Activos
+            </Button>
+          </Link>
+        </div>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
