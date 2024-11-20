@@ -229,9 +229,10 @@ export default function CarbonCreditMarketplace() {
                   <span>{credit.certification}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="font-semibold">Precio por crédito:</span>
+                  <span className="font-semibold">Precio:</span>
                   <span className="text-green-600 font-bold">
-                    ${credit.price}
+                    ${credit.price * 950} / {credit.quantity}{" "}
+                    <span className="text-green-600 font-bold">tCO2</span>
                   </span>
                 </div>
               </div>

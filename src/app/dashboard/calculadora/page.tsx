@@ -49,6 +49,9 @@ const formSchema = z.object({
   heatingSystem: z.enum(["electric", "gas", "oil", "heatPump", "other"]),
   coolingSystem: z.enum(["none", "fans", "airConditioning"]),
   waterUsage: z.number().min(0).max(1000),
+  adultsNumber: z.number().min(0).max(20),
+  childrenNumber: z.number().min(0).max(20),
+  elderlyNumber: z.number().min(0).max(20),
 
   // Transportation
   primaryTransport: z.enum(["car", "publicTransport", "bicycle", "walking"]),
@@ -382,6 +385,69 @@ export default function CarbonFootprintCalculator() {
                         </FormItem>
                       )}
                     />
+                    {/* campos para cargar eel numero de habitantes adultos*/}
+                    <FormField
+                      control={form.control}
+                      name="adultsNumber"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Número de Adultos</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="number"
+                              {...field}
+                              onChange={(e) =>
+                                field.onChange(parseInt(e.target.value))
+                              }
+                              value="1"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    {/* campos para cargar eel numero de habitantes niños*/}
+                    <FormField
+                      control={form.control}
+                      name="childrenNumber"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Número de Niños</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="number"
+                              {...field}
+                              onChange={(e) =>
+                                field.onChange(parseInt(e.target.value))
+                              }
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* campos para cargar eel numero de habitantes adultos mayores*/}
+                    <FormField
+                      control={form.control}
+                      name="elderlyNumber"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Número de Adultos Mayores</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="number"
+                              {...field}
+                              onChange={(e) =>
+                                field.onChange(parseInt(e.target.value))
+                              }
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
                     <FormField
                       control={form.control}
                       name="houseSize"
