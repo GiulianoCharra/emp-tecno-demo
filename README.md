@@ -1,18 +1,21 @@
-# 🌿 EcoHuella: Gestión Inteligente de Huella de Carbono
+# 🌿 EcoHuella: Gestión Inteligente de Huella de Carbono (Demo)
 
-![EcoHuella Logo](./docs/images/logo.png)
-<!-- Prompt for image generation: A modern, minimalist logo featuring a green leaf integrated with a digital fingerprint, symbolizing the intersection of nature and technology for carbon footprint management -->
+<p align="center">
+   <img src="./docs/images/logo.png" alt="EcoHuella Logo" width="50%" max-width="300">
+</p>
 
 ## 📊 Sobre el Proyecto
 
-EcoHuella es una solución integral para la gestión y reducción de la huella de carbono empresarial, desarrollada como parte del curso de Emprendimiento Tecnológico en la carrera de Ingeniería en Sistemas de Información.
+EcoHuella es una demostración de una solución integral para la gestión y reducción de la huella de carbono empresarial, desarrollada como parte del curso de Emprendimiento Tecnológico en la carrera de Ingeniería en Sistemas de Información.
+
+**Nota Importante:** Esta versión es una demo que se enfoca principalmente en el diseño del front-end con funcionalidad mínima/simulada. No representa un producto completamente funcional en esta etapa.
 
 ### 👥 Equipo
 
 - Giuliano Benicio Charra Marquez
 - Abril Barragán
 
-## 🚀 Características Principales
+## 🚀 Características Principales (Simuladas)
 
 - 📈 Dashboard interactivo para visualización de datos de emisiones
 - 🏢 Gestión de activos (edificios, vehículos, maquinaria)
@@ -52,27 +55,33 @@ Para iniciar el proyecto en tu entorno local:
 
 ## 📸 Capturas de Pantalla
 
-![Dashboard](./path/to/dashboard-screenshot.png)
+<p align="center">
+   <img src="./docs/images/dashboard.png" alt="Dashboard" width="600">
+</p>
+
 <!-- Prompt for image generation: A sleek dashboard interface showing carbon emission graphs, asset management tiles, and a summary of environmental impact metrics -->
 
-![Calculadora de Huella de Carbono](./path/to/calculator-screenshot.png)
+<p align="center">
+   <img src="./docs/images/calculadora.png" alt="Calculadora de Huella de Carbono" width="600">
+</p>
+
 <!-- Prompt for image generation: A user-friendly carbon footprint calculator interface with input fields for various activities and a visual representation of the calculated impact -->
 
 ## 📚 Documentación
 
-Para más información sobre cómo usar y configurar EcoHuella, consulta nuestra [documentación completa](./docs/README.md).
+Para más información sobre cómo usar y configurar la demo de EcoHuella, consulta nuestra [documentación completa](./docs/README.md).
 
 ## 🤝 Contribuir
 
-¡Agradecemos las contribuciones! Por favor, lee nuestra [guía de contribución](CONTRIBUTING.md) para más detalles sobre cómo puedes ayudar a mejorar EcoHuella.
+Aunque esta es una demo, ¡agradecemos las sugerencias y feedback! Por favor, lee nuestra [guía de contribución](CONTRIBUTING.md) para más detalles sobre cómo puedes ayudar a mejorar EcoHuella.
 
 ## 📄 Licencia
 
-Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+Este proyecto de demostración está licenciado bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
 ## 📞 Contacto
 
-Para más información o consultas, no dudes en contactarnos:
+Para más información o consultas sobre esta demo, no dudes en contactarnos:
 
 - 📧 Email: info@ecohuella.com
 - 🌐 Sitio web: [www.ecohuella.com](https://www.ecohuella.com)
