@@ -62,7 +62,7 @@ Para iniciar el proyecto en tu entorno local:
 <!-- Prompt for image generation: A sleek dashboard interface showing carbon emission graphs, asset management tiles, and a summary of environmental impact metrics -->
 
 <p align="center">
-   <img src="./docs/images/gesion-activos.png" alt="Gestion de Activos de la Empresa" width="600">
+   <img src="./docs/images/gestion-activos.png" alt="Gestion de Activos de la Empresa" width="600">
 </p>
 
 <!-- Prompt for image generation: A user-friendly carbon footprint calculator interface with input fields for various activities and a visual representation of the calculated impact -->
