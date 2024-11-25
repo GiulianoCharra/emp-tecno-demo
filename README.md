@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌿 EcoHuella: Gestión Inteligente de Huella de Carbono
 
-## Getting Started
+![EcoHuella Logo](./docs/images/logo.png)
+<!-- Prompt for image generation: A modern, minimalist logo featuring a green leaf integrated with a digital fingerprint, symbolizing the intersection of nature and technology for carbon footprint management -->
 
-First, run the development server:
+## 📊 Sobre el Proyecto
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+EcoHuella es una solución integral para la gestión y reducción de la huella de carbono empresarial, desarrollada como parte del curso de Emprendimiento Tecnológico en la carrera de Ingeniería en Sistemas de Información.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 👥 Equipo
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Giuliano Benicio Charra Marquez
+- Abril Barragán
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Características Principales
 
-## Learn More
+- 📈 Dashboard interactivo para visualización de datos de emisiones
+- 🏢 Gestión de activos (edificios, vehículos, maquinaria)
+- 👥 Seguimiento de emisiones por empleado
+- 🌍 Calculadora de huella de carbono
+- 💹 Marketplace de bonos de carbono
+- 📊 Informes detallados y análisis estadístico
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠 Tecnologías Utilizadas
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
+- ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+- ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+- ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🚀 Comenzando
 
-## Deploy on Vercel
+Para iniciar el proyecto en tu entorno local:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/tu-usuario/ecohuella.git
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. Instala las dependencias:
+   ```bash
+   cd ecohuella
+   npm install
+   ```
+
+3. Inicia el servidor de desarrollo:
+   ```bash
+   npm run dev
+   ```
+
+4. Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la aplicación.
+
+## 📸 Capturas de Pantalla
+
+![Dashboard](./path/to/dashboard-screenshot.png)
+<!-- Prompt for image generation: A sleek dashboard interface showing carbon emission graphs, asset management tiles, and a summary of environmental impact metrics -->
+
+![Calculadora de Huella de Carbono](./path/to/calculator-screenshot.png)
+<!-- Prompt for image generation: A user-friendly carbon footprint calculator interface with input fields for various activities and a visual representation of the calculated impact -->
+
+## 📚 Documentación
+
+Para más información sobre cómo usar y configurar EcoHuella, consulta nuestra [documentación completa](./docs/README.md).
+
+## 🤝 Contribuir
+
+¡Agradecemos las contribuciones! Por favor, lee nuestra [guía de contribución](CONTRIBUTING.md) para más detalles sobre cómo puedes ayudar a mejorar EcoHuella.
+
+## 📄 Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+
+## 📞 Contacto
+
+Para más información o consultas, no dudes en contactarnos:
+
+- 📧 Email: info@ecohuella.com
+- 🌐 Sitio web: [www.ecohuella.com](https://www.ecohuella.com)
+- 🐦 Twitter: [@EcoHuella](https://twitter.com/EcoHuella)
+
+---
+
+Desarrollado con 💚 por el equipo de EcoHuella
